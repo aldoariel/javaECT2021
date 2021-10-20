@@ -1,0 +1,718 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.10
+-- Dumped by pg_dump version 9.2.10
+-- Started on 2021-09-25 09:08:48
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 184 (class 3079 OID 11727)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2014 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 182 (class 1259 OID 65844)
+-- Name: aula; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE aula (
+    aula_id integer NOT NULL,
+    nombre text
+);
+
+
+ALTER TABLE public.aula OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 65849)
+-- Name: aula_aula_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE aula_aula_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.aula_aula_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2015 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: aula_aula_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE aula_aula_id_seq OWNED BY aula.aula_id;
+
+
+--
+-- TOC entry 169 (class 1259 OID 16404)
+-- Name: cliente; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cliente (
+    codigo integer NOT NULL,
+    nombre character varying
+);
+
+
+ALTER TABLE public.cliente OWNER TO postgres;
+
+--
+-- TOC entry 168 (class 1259 OID 16402)
+-- Name: cliente_codigo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE cliente_codigo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cliente_codigo_seq OWNER TO postgres;
+
+--
+-- TOC entry 2016 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: cliente_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE cliente_codigo_seq OWNED BY cliente.codigo;
+
+
+--
+-- TOC entry 179 (class 1259 OID 32941)
+-- Name: departamento; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE departamento (
+    departamento_id integer NOT NULL,
+    nombre character varying,
+    pais_id integer
+);
+
+
+ALTER TABLE public.departamento OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 32939)
+-- Name: departamento_departamento_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE departamento_departamento_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.departamento_departamento_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2017 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: departamento_departamento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE departamento_departamento_id_seq OWNED BY departamento.departamento_id;
+
+
+--
+-- TOC entry 171 (class 1259 OID 16522)
+-- Name: dept; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE dept (
+    dept_id integer NOT NULL,
+    nombre character varying
+);
+
+
+ALTER TABLE public.dept OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 16520)
+-- Name: dept_dept_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE dept_dept_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.dept_dept_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2018 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: dept_dept_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE dept_dept_id_seq OWNED BY dept.dept_id;
+
+
+--
+-- TOC entry 173 (class 1259 OID 16535)
+-- Name: emp; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE emp (
+    emp_id integer NOT NULL,
+    nombre character varying,
+    dept_id integer
+);
+
+
+ALTER TABLE public.emp OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 16533)
+-- Name: emp_emp_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE emp_emp_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.emp_emp_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2019 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: emp_emp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE emp_emp_id_seq OWNED BY emp.emp_id;
+
+
+--
+-- TOC entry 177 (class 1259 OID 32930)
+-- Name: pais; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pais (
+    pais_id integer NOT NULL,
+    nombre character varying
+);
+
+
+ALTER TABLE public.pais OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 32928)
+-- Name: pais_pais_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pais_pais_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pais_pais_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2020 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: pais_pais_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pais_pais_id_seq OWNED BY pais.pais_id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 24712)
+-- Name: producto; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE producto (
+    codigo integer NOT NULL,
+    descripcion character varying
+);
+
+
+ALTER TABLE public.producto OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 24710)
+-- Name: producto_codigo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE producto_codigo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.producto_codigo_seq OWNER TO postgres;
+
+--
+-- TOC entry 2021 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: producto_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE producto_codigo_seq OWNED BY producto.codigo;
+
+
+--
+-- TOC entry 180 (class 1259 OID 65832)
+-- Name: profesor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE profesor (
+    profesor_id integer NOT NULL,
+    cedula text,
+    nombre text
+);
+
+
+ALTER TABLE public.profesor OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 65835)
+-- Name: profesor_profesor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE profesor_profesor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.profesor_profesor_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2022 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: profesor_profesor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE profesor_profesor_id_seq OWNED BY profesor.profesor_id;
+
+
+--
+-- TOC entry 1860 (class 2604 OID 16407)
+-- Name: codigo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cliente ALTER COLUMN codigo SET DEFAULT nextval('cliente_codigo_seq'::regclass);
+
+
+--
+-- TOC entry 1865 (class 2604 OID 32944)
+-- Name: departamento_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY departamento ALTER COLUMN departamento_id SET DEFAULT nextval('departamento_departamento_id_seq'::regclass);
+
+
+--
+-- TOC entry 1861 (class 2604 OID 16525)
+-- Name: dept_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY dept ALTER COLUMN dept_id SET DEFAULT nextval('dept_dept_id_seq'::regclass);
+
+
+--
+-- TOC entry 1862 (class 2604 OID 16538)
+-- Name: emp_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY emp ALTER COLUMN emp_id SET DEFAULT nextval('emp_emp_id_seq'::regclass);
+
+
+--
+-- TOC entry 1864 (class 2604 OID 32933)
+-- Name: pais_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pais ALTER COLUMN pais_id SET DEFAULT nextval('pais_pais_id_seq'::regclass);
+
+
+--
+-- TOC entry 1863 (class 2604 OID 24715)
+-- Name: codigo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY producto ALTER COLUMN codigo SET DEFAULT nextval('producto_codigo_seq'::regclass);
+
+
+--
+-- TOC entry 1866 (class 2604 OID 65837)
+-- Name: profesor_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY profesor ALTER COLUMN profesor_id SET DEFAULT nextval('profesor_profesor_id_seq'::regclass);
+
+
+--
+-- TOC entry 2005 (class 0 OID 65844)
+-- Dependencies: 182
+-- Data for Name: aula; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY aula (aula_id, nombre) FROM stdin;
+1	aula 1
+\.
+
+
+--
+-- TOC entry 2023 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: aula_aula_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('aula_aula_id_seq', 1, false);
+
+
+--
+-- TOC entry 1992 (class 0 OID 16404)
+-- Dependencies: 169
+-- Data for Name: cliente; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY cliente (codigo, nombre) FROM stdin;
+36	marcelo
+40	Valeria
+7	Claudia
+1	Liz del Campo
+12	Diana
+33	Roberto
+22	REGISTRO TEST
+61	poner orden
+8	Andres2
+62	Lucas Gonzalez
+46	registro 46 nuevo
+72	Analia
+73	Juan
+74	Jose 999modificado
+76	carga de cero
+35	Es el registro 35
+77	Nuevo registro 0305
+39	Nuevo 39
+38	aldo el idolo
+79	este es un nuevo registro
+\.
+
+
+--
+-- TOC entry 2024 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: cliente_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cliente_codigo_seq', 79, true);
+
+
+--
+-- TOC entry 2002 (class 0 OID 32941)
+-- Dependencies: 179
+-- Data for Name: departamento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY departamento (departamento_id, nombre, pais_id) FROM stdin;
+1	dept 1	2
+\.
+
+
+--
+-- TOC entry 2025 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: departamento_departamento_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('departamento_departamento_id_seq', 1, false);
+
+
+--
+-- TOC entry 1994 (class 0 OID 16522)
+-- Dependencies: 171
+-- Data for Name: dept; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY dept (dept_id, nombre) FROM stdin;
+6	Departamento11
+7	Departamento12
+8	Departamento 13
+1	Departamento 01x
+2	registro 2
+11	departamentAbril
+12	22
+\.
+
+
+--
+-- TOC entry 2026 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: dept_dept_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('dept_dept_id_seq', 12, true);
+
+
+--
+-- TOC entry 1996 (class 0 OID 16535)
+-- Dependencies: 173
+-- Data for Name: emp; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY emp (emp_id, nombre, dept_id) FROM stdin;
+1	Juan Perez	1
+3	Juan Perez 2	1
+\.
+
+
+--
+-- TOC entry 2027 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: emp_emp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('emp_emp_id_seq', 5, true);
+
+
+--
+-- TOC entry 2000 (class 0 OID 32930)
+-- Dependencies: 177
+-- Data for Name: pais; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY pais (pais_id, nombre) FROM stdin;
+3	ssss
+2	2
+4	eeeeeeeeee
+6	eeeeeeeeeee
+7	uuuuuuuuuuuuuuuuuuuu
+11	paisses1
+12	paises2
+13	paises3
+5	tt2222
+15	pais01
+22	uu01
+27	passs3
+25	xxxxs
+28	eeee1111111111
+26	passs2xxxxxx
+\.
+
+
+--
+-- TOC entry 2028 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: pais_pais_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('pais_pais_id_seq', 28, true);
+
+
+--
+-- TOC entry 1998 (class 0 OID 24712)
+-- Dependencies: 175
+-- Data for Name: producto; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY producto (codigo, descripcion) FROM stdin;
+1	hhh
+2	eiii
+3	oiiii
+4	oppppp
+5	jkkkk
+6	rt
+7	cuaderno
+8	essss
+9	caño proyector
+10	fffffffffffffffffffffff
+11	YUYU
+12	tt1000
+13	yyy
+14	ooo
+15	Mesas
+17	re29
+16	554444444
+\.
+
+
+--
+-- TOC entry 2029 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: producto_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('producto_codigo_seq', 17, true);
+
+
+--
+-- TOC entry 2003 (class 0 OID 65832)
+-- Dependencies: 180
+-- Data for Name: profesor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY profesor (profesor_id, cedula, nombre) FROM stdin;
+1	\N	eee
+2	\N	registro2
+3	\N	profesor 3
+\.
+
+
+--
+-- TOC entry 2030 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: profesor_profesor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('profesor_profesor_id_seq', 3, true);
+
+
+--
+-- TOC entry 1882 (class 2606 OID 65853)
+-- Name: aula_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY aula
+    ADD CONSTRAINT aula_pkey PRIMARY KEY (aula_id);
+
+
+--
+-- TOC entry 1868 (class 2606 OID 16412)
+-- Name: cliente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cliente
+    ADD CONSTRAINT cliente_pkey PRIMARY KEY (codigo);
+
+
+--
+-- TOC entry 1878 (class 2606 OID 32949)
+-- Name: departamento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY departamento
+    ADD CONSTRAINT departamento_pkey PRIMARY KEY (departamento_id);
+
+
+--
+-- TOC entry 1870 (class 2606 OID 16530)
+-- Name: dept_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY dept
+    ADD CONSTRAINT dept_pkey PRIMARY KEY (dept_id);
+
+
+--
+-- TOC entry 1872 (class 2606 OID 16543)
+-- Name: emp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY emp
+    ADD CONSTRAINT emp_pkey PRIMARY KEY (emp_id);
+
+
+--
+-- TOC entry 1876 (class 2606 OID 32938)
+-- Name: pais_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pais
+    ADD CONSTRAINT pais_pkey PRIMARY KEY (pais_id);
+
+
+--
+-- TOC entry 1874 (class 2606 OID 24720)
+-- Name: producto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY producto
+    ADD CONSTRAINT producto_pkey PRIMARY KEY (codigo);
+
+
+--
+-- TOC entry 1880 (class 2606 OID 65848)
+-- Name: profesor_id_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY profesor
+    ADD CONSTRAINT profesor_id_pk PRIMARY KEY (profesor_id);
+
+
+--
+-- TOC entry 1883 (class 2606 OID 16544)
+-- Name: emp_dept_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY emp
+    ADD CONSTRAINT emp_dept_id_fkey FOREIGN KEY (dept_id) REFERENCES dept(dept_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 1884 (class 2606 OID 32966)
+-- Name: pais_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY departamento
+    ADD CONSTRAINT pais_id_fkey FOREIGN KEY (pais_id) REFERENCES pais(pais_id);
+
+
+--
+-- TOC entry 2013 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2021-09-25 09:08:48
+
+--
+-- PostgreSQL database dump complete
+--
+
